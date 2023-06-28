@@ -1,13 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { AppContext } from "../App";
 
 function Winner() {
- 
-  const { winner } = useContext(AppContext)
+  const { winner } = useContext(AppContext);
 
   return (
-      <div>Congratulations <span>{winner}</span>, you WON!</div>
-  )
+    <div>
+      Congratulations <span>{winner}</span>, you WON!
+    </div>
+  );
 }
 
-export default Winner
+export default Winner;

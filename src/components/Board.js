@@ -1,23 +1,28 @@
-import React from "react";
+
+import React, { useState } from "react";
 import Cell from "./Cell";
+import "../style/board.css";
 
 function Board() {
- 
-  return (
-      <div className="board">
-          <Cell row={0} column={0} />
-          <Cell row={0} column={1} />
-          <Cell row={0} column={2} />
-         
-          <Cell row={1} column={0} />
-          <Cell row={1} column={1} />
-          <Cell row={1} column={2} />
+  const [cells, setCells] = useState(Array(9).fill(null));
+  const [isXTurn, setIsXTurn] = useState(true);
 
-          <Cell row={2} column={0} />
-          <Cell row={2} column={1} />
-          <Cell row={2} column={2} />
-     </div>
-  )
+  const handleCellClick = (index) => {
+    if (cells[index] === null) {
+      const newCells = [...cells];
+      newCells[index] = isXTurn ? "X" : "O";
+      setCells(newCells);
+      setIsXTurn(!isXTurn);
+    }
+  };
+
+  return (
+    <div className="board">
+      {cells.map((cell, index) => (
+        <Cell key={index} value={cell} onClick={() => handleCellClick(index)} />
+      ))}
+    </div>
+  );
 }
 
-export default Board
+export default Board;
