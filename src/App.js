@@ -21,26 +21,19 @@ function App() {
   }, [cells]);
 
   function cellClick(row, column) {
-    console.log("Cells:", cells);
-    console.log("Game Over:", gameOver);
-    console.log("Winner:", winner);
-  
-    if (!cells || gameOver || winner) {
+    if (gameOver || winner || cells[row][column] !== "") {
       return;
     }
   
-    if (cells[row][column] !== "") {
-      return;
-    }
-  
-    const newCells = [...cells];
+    const newCells = cells.map((rowArr) => [...rowArr]);
     newCells[row][column] = currentChar;
-    console.log("New Cells:", newCells);
   
     setCells(newCells);
+    console.log("Updated cells:", newCells); // Add this line to check the updated cells array
     changeChar();
   }
-  
+    
+    
   
   
 

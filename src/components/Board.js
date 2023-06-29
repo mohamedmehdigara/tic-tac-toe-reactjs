@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import Cell from "./Cell";
 import "../style/board.css";
@@ -15,14 +14,23 @@ function Board() {
       setIsXTurn(!isXTurn);
     }
   };
-
+  
   return (
     <div className="board">
-      {cells.map((cell, index) => (
-        <Cell key={index} value={cell} onClick={() => handleCellClick(index)} />
-      ))}
+      {[0, 1, 2].map((row) =>
+        [0, 1, 2].map((column) => (
+          <Cell
+            key={`${row}-${column}`}
+            row={row}
+            column={column}
+            value={cells[row * 3 + column]}
+            onClick={handleCellClick}
+          />
+        ))
+      )}
     </div>
   );
 }
 
 export default Board;
+

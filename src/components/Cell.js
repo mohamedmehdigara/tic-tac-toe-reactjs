@@ -4,15 +4,21 @@ import "../style/cell.css";
 
 function Cell({ row, column }) {
   const { cells, cellClick, gameOver, winnerCells } = useContext(AppContext);
-  const currentVal = cells[row * 3 + column];
+  const currentVal = cells[row][column];
+
+  const isCellClickable = () => {
+    return !currentVal && !gameOver;
+  };
+
+  const isCellWinner = () => {
+    return winnerCells[row][column];
+  };
 
   return (
     <div
-      className={`cell ${
-        !currentVal && !gameOver ? "active" : ""
-      } ${winnerCells[row * 3 + column] ? "winner" : ""} ${
-        gameOver ? "disabled" : ""
-      }`}
+      className={`cell ${isCellClickable() ? "active" : ""} ${
+        isCellWinner() ? "winner" : ""
+      } ${gameOver ? "disabled" : ""}`}
       onClick={() => cellClick(row, column)}
     >
       <div>{currentVal}</div>
@@ -21,3 +27,4 @@ function Cell({ row, column }) {
 }
 
 export default Cell;
+
